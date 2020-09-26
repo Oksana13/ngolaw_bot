@@ -1,0 +1,19 @@
+{
+  "name": "zona-prava-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "app": "npx nodemon ./index.js"
+  },
+  "author": "Oksana Klimova",
+  "license": "ISC",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.50.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.9.0",
+    "nodemon": "^2.0.4"
+  }
+}

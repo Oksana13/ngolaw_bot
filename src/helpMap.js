@@ -13,7 +13,7 @@ ${item.contacts}
   }).join('\n');
 }
 
-function showFederalCenters (id, bot) {
+function showFederalCentersBtn (id, bot) {
   bot.sendMessage(id, `Просмотреть федеральные кризисные центры?`, {
     reply_markup: {
       inline_keyboard: kb.federalCenters,
@@ -57,12 +57,12 @@ module.exports = {
 
           // Show button for search federal centers
           setTimeout(() => {
-            showFederalCenters(id, bot);
+            showFederalCentersBtn(id, bot);
           }, 1000);
         } else {
           bot.removeTextListener(REGION_REG_EXP);
           await bot.sendMessage(id, 'К сожалению в данном регионе нет кризисных центров. Или название региона указано неверно')
-          showFederalCenters(id, bot);
+          showFederalCentersBtn(id, bot);
         }
       });
     } catch (error) {
@@ -81,6 +81,12 @@ module.exports = {
       parse_mode: 'HTML',
       disable_web_page_preview: true,
     });
-    backToMainMenu(id, bot);
+    setTimeout(() => {
+      bot.sendMessage(id, 'Вернуться в главное меню?', {
+        reply_markup: {
+          inline_keyboard: kb.backAndSearch,
+        },
+      });
+    }, 1000);
   },
 };

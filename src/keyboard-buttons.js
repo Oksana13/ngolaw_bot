@@ -21,11 +21,25 @@ module.exports = {
       callback_data: 'federalCenters',
     }],
     [{
+      text: l10n.newSearch,
+      callback_data: 'helpMap',
+    }],
+    [{
       text: l10n.backButton,
       callback_data: 'back',
     }],
   ],
   back: [
+    [{
+      text: l10n.backButton,
+      callback_data: 'back',
+    }],
+  ],
+  backAndSearch: [
+    [{
+      text: l10n.newSearch,
+      callback_data: 'helpMap',
+    }],
     [{
       text: l10n.backButton,
       callback_data: 'back',

@@ -6,5 +6,6 @@ module.exports = {
     INSTRUCTION_4: 'Правила подачи заявлений',
     backButton: 'Назад',
     chooseSection: 'Выберите раздел:',
+    newSearch: 'Новый поиск',
   },
 };

@@ -1,6 +1,6 @@
 const mapJson = require('./map.json');
 const { parseText, backToMainMenu } = require('./helpers');
-const kb = require ('./keyboard-buttons.js');
+const kb = require ('./keyboard-buttons');
 
 const REGION_REG_EXP = /^[а-яА-ЯЁё0-9 ]+$/;
 

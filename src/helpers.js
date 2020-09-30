@@ -1,4 +1,4 @@
-const kb = require ('./keyboard-buttons.js');
+const kb = require ('./keyboard-buttons');
 
 module.exports = {
   debug(obj = {}) {

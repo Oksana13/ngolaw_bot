@@ -1,9 +1,9 @@
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
-const {instructionsHandler, sendLink, LINKS} = require('./instructions.js');
-const { helpMapHandler, showFederalCenters } = require('./helpMap.js');
-const kb = require ('./keyboard-buttons.js');
-const { getChatId, backToMainMenu } = require ('./helpers.js');
+const {instructionsHandler, sendLink, LINKS} = require('./instructions');
+const { helpMapHandler, showFederalCenters } = require('./helpMap');
+const kb = require ('./keyboard-buttons');
+const { getChatId, backToMainMenu } = require ('./helpers');
 
 const bot = new TelegramBot(process.env.TOKEN, {
   polling: {

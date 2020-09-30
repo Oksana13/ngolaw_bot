@@ -1,7 +1,9 @@
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const {instructionsHandler, sendLink, LINKS} = require('./instructions.js');
-const helpMapHandler = require('./helpMap.js');
+const { helpMapHandler, showFederalCenters } = require('./helpMap.js');
+const kb = require ('./keyboard-buttons.js');
+const { getChatId, backToMainMenu } = require ('./helpers.js');
 
 const bot = new TelegramBot(process.env.TOKEN, {
   polling: {
@@ -32,54 +34,53 @@ const botDescription = `Привет! Это бот правозащитной  
 2. узнать адреса центров помощи в своем регионе,
 3. обратиться за юридической помощью.`
 
-// handle commands
+// start bot
+bot.onText(/\/start/, async msg => {
+  try {
+    await bot.sendMessage(getChatId(msg), botDescription)
+    bot.sendMessage(getChatId(msg), 'Выберите нужный раздел.', {
+      reply_markup: {
+        inline_keyboard: kb.home,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+})
 
+// handle commands
 bot.on('message', async msg => {
-  const { id } = msg.chat
   const text = msg.text.trim();
 
   switch (text) {
-    case '/start':
-      await bot.sendMessage(id, botDescription)
-      await bot.sendMessage(id, 'Выберите нужный раздел.', {
-        reply_markup: {
-          inline_keyboard: [
-            [{
-              text: 'Инструкции',
-              callback_data: 'instructions',
-            }],
-            [{
-              text: 'Помощь юристов',
-              callback_data: 'legalAssistance',
-            }],
-            [{
-              text: 'Карта помощи',
-              callback_data: 'helpMap',
-            }],
-          ],
-        },
-      });
-      break;
     case '/instructions':
-      instructionsHandler(id, bot);
+      instructionsHandler(getChatId(msg), bot);
       break;
     case '/helpmap':
-      helpMapHandler(id, bot);
+      helpMapHandler(getChatId(msg), bot);
       break;
     case '/legalhelp':
-      bot.sendMessage(id, offerText);
+      await bot.sendMessage(getChatId(msg), offerText);
+      backToMainMenu(getChatId(msg), bot);
       break;
     case 'План безопасности':
-      sendLink(id, bot, LINKS.SAFETY_PLAN);
+      sendLink(getChatId(msg), bot, LINKS.SAFETY_PLAN);
       break;
     case 'Что делать, если вы пострадали от физического насилия?':
-      sendLink(id, bot, LINKS.PHISICAL_VIOLENCE);
+      sendLink(getChatId(msg), bot, LINKS.PHISICAL_VIOLENCE);
       break;
     case 'Что делать, если вы пострадали от сексуализированного насилия?':
-      sendLink(id, bot, LINKS.SEXUAL_VIOLENCE);
+      sendLink(getChatId(msg), bot, LINKS.SEXUAL_VIOLENCE);
       break;
     case 'Правила подачи заявлений':
-      sendLink(id, bot, LINKS.RULES_SENDING_APPLICATION);
+      sendLink(getChatId(msg), bot, LINKS.RULES_SENDING_APPLICATION);
+      break;
+    case 'Назад':
+      bot.sendMessage(getChatId(msg), 'Выберите раздел:', {
+        reply_markup: {
+          inline_keyboard: kb.home,
+        },
+      });
       break;
     default:
       break;
@@ -87,19 +88,29 @@ bot.on('message', async msg => {
 })
 
 // handle main menu buttons
-
-bot.on('callback_query', query => {
-  const { id } = query.message.chat;
+bot.on('callback_query', async query => {
+  const userId = query.from.id
 
   switch (query.data) {
     case 'instructions':
-      instructionsHandler(id, bot);
+      instructionsHandler(userId, bot);
       break;
     case 'legalAssistance':
-      bot.sendMessage(id, offerText);
+      await bot.sendMessage(userId, offerText);
+      backToMainMenu(userId, bot);
       break;
     case 'helpMap':
-      helpMapHandler(id, bot);
+      helpMapHandler(userId, bot);
+      break;
+    case 'federalCenters':
+      showFederalCenters(userId, bot);
+      break;
+    case 'back':
+      bot.sendMessage(userId, 'Выберите нужный раздел.', {
+        reply_markup: {
+          inline_keyboard: kb.home,
+        },
+      });
       break;
     default:
       break;

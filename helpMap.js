@@ -1,5 +1,5 @@
 const mapJson = require('./map.json');
-const { convertText } = require('./helpers');
+const { parseText } = require('./helpers');
 
 function mapResultHtml (centers) {
   return centers.map((item, index) => {
@@ -27,13 +27,19 @@ async function helpMapHandler(id, bot) {
   await bot.sendMessage(id, 'Укажите название или номер вашего региона');
   await bot.onText(/^[а-яА-ЯЁё0-9 ]+$/, async (msg) => {
     const { text } = msg;
+    const requestStringArr = text.split(' ');
 
     // search for requested region
     let regionCenters = text
       ? await mapJson.filter((item) => {
         return Number(item.regionNumber) === Number(text)
-        || (item.regionName && convertText(item.regionName) === convertText(text))
-        || (item.regionNameSecondary && convertText(item.regionNameSecondary) === convertText(text));
+        || (item.regionName && parseText(item.regionName) === parseText(text))
+        || (item.regionNameSecondary && parseText(item.regionNameSecondary) === parseText(text))
+        || requestStringArr.find((requestedVal => {
+          return Number(item.regionNumber) === Number(requestedVal)
+            || (item.regionName && parseText(item.regionName) === parseText(requestedVal))
+            || (item.regionNameSecondary && parseText(item.regionNameSecondary) === parseText(requestedVal))
+        }))
       }) : [];
 
     // if we have data for requested region map the data and send to user
@@ -53,9 +59,8 @@ async function helpMapHandler(id, bot) {
         showFederalCenters(id, bot);
       }, 1000);
     } else {
-      bot.sendMessage(id, 'К сожалению в данном регионе нет кризисных центров').then(() => {
-        showFederalCenters(id, bot);
-      });
+      await bot.sendMessage(id, 'К сожалению в данном регионе нет кризисных центров. Или название региона указано неверно')
+      showFederalCenters(id, bot);
     }
   });
 

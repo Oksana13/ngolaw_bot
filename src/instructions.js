@@ -1,3 +1,5 @@
+const { l10n } = require ('./constants');
+
 module.exports = {
   async sendLink(id, bot, link) {
     await bot.sendMessage(id, link, {
@@ -18,11 +20,11 @@ module.exports = {
     await bot.sendMessage(id, 'Выберите инструкцию:', {
       reply_markup: {
         keyboard: [
-          ['План безопасности'],
-          ['Что делать, если вы пострадали от физического насилия?'],
-          ['Что делать, если вы пострадали от сексуализированного насилия?'],
-          ['Правила подачи заявлений'],
-          ['Назад'],
+          [l10n.INSTRUCTION_1],
+          [l10n.INSTRUCTION_2],
+          [l10n.INSTRUCTION_3],
+          [l10n.INSTRUCTION_4],
+          [l10n.backButton],
         ],
         resize_keyboard: true,
       },

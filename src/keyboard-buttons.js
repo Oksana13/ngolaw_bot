@@ -1,3 +1,5 @@
+const { l10n } = require ('./constants');
+
 module.exports = {
   home: [
     [{
@@ -19,13 +21,13 @@ module.exports = {
       callback_data: 'federalCenters',
     }],
     [{
-      text: 'Назад',
+      text: l10n.backButton,
       callback_data: 'back',
     }],
   ],
   back: [
     [{
-      text: 'Назад',
+      text: l10n.backButton,
       callback_data: 'back',
     }],
   ],

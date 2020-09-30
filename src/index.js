@@ -3,7 +3,8 @@ const TelegramBot = require('node-telegram-bot-api');
 const {instructionsHandler, sendLink, LINKS} = require('./instructions');
 const { helpMapHandler, showFederalCenters } = require('./helpMap');
 const kb = require ('./keyboard-buttons');
-const { getChatId, backToMainMenu } = require ('./helpers');
+const { getChatId, backToMainMenu, mainMenuHandler } = require ('./helpers');
+const { l10n } = require ('./constants');
 
 const bot = new TelegramBot(process.env.TOKEN, {
   polling: {
@@ -38,11 +39,7 @@ const botDescription = `Привет! Это бот правозащитной  
 bot.onText(/\/start/, async msg => {
   try {
     await bot.sendMessage(getChatId(msg), botDescription)
-    bot.sendMessage(getChatId(msg), 'Выберите нужный раздел.', {
-      reply_markup: {
-        inline_keyboard: kb.home,
-      },
-    });
+    mainMenuHandler(getChatId(msg), bot);
   } catch (error) {
     console.error(error);
   }
@@ -63,20 +60,20 @@ bot.on('message', async msg => {
       await bot.sendMessage(getChatId(msg), offerText);
       backToMainMenu(getChatId(msg), bot);
       break;
-    case 'План безопасности':
+    case l10n.INSTRUCTION_1:
       sendLink(getChatId(msg), bot, LINKS.SAFETY_PLAN);
       break;
-    case 'Что делать, если вы пострадали от физического насилия?':
+    case l10n.INSTRUCTION_2:
       sendLink(getChatId(msg), bot, LINKS.PHISICAL_VIOLENCE);
       break;
-    case 'Что делать, если вы пострадали от сексуализированного насилия?':
+    case l10n.INSTRUCTION_3:
       sendLink(getChatId(msg), bot, LINKS.SEXUAL_VIOLENCE);
       break;
-    case 'Правила подачи заявлений':
+    case l10n.INSTRUCTION_4:
       sendLink(getChatId(msg), bot, LINKS.RULES_SENDING_APPLICATION);
       break;
-    case 'Назад':
-      bot.sendMessage(getChatId(msg), 'Выберите раздел:', {
+    case l10n.backButton:
+      bot.sendMessage(getChatId(msg), l10n.chooseSection, {
         reply_markup: {
           inline_keyboard: kb.home,
         },
@@ -106,11 +103,7 @@ bot.on('callback_query', async query => {
       showFederalCenters(userId, bot);
       break;
     case 'back':
-      bot.sendMessage(userId, 'Выберите нужный раздел.', {
-        reply_markup: {
-          inline_keyboard: kb.home,
-        },
-      });
+      mainMenuHandler(userId, bot);
       break;
     default:
       break;

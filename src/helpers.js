@@ -1,4 +1,5 @@
 const kb = require ('./keyboard-buttons');
+const { l10n } = require ('./constants');
 
 module.exports = {
   debug(obj = {}) {
@@ -21,5 +22,13 @@ module.exports = {
         },
       });
     }, 1000);
+  },
+
+  mainMenuHandler(id, bot) {
+    bot.sendMessage(id, l10n.chooseSection, {
+      reply_markup: {
+        inline_keyboard: kb.home,
+      },
+    });
   },
 };

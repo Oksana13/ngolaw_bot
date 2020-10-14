@@ -28,17 +28,9 @@ const offerText =
 Напишите письмо: 
 info.zonaprava@gmail.com.`
 
-const botDescription = `Привет! Это бот правозащитной  организации «Зона права». Мы  защищаем права людей в тюрьмах, армии и медучреждениях. Также мы помогаем людям, пострадавшим от домашнего насилия. 
-
-С помощью этого бота вы можете: 
-1. Получить план действий в случае домашнего насилия,
-2. узнать адреса центров помощи в своем регионе,
-3. обратиться за юридической помощью.`
-
 // start bot
 bot.onText(/\/start/, async msg => {
   try {
-    await bot.sendMessage(getChatId(msg), botDescription)
     mainMenuHandler(getChatId(msg), bot);
   } catch (error) {
     console.error(error);

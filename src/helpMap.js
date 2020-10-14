@@ -1,5 +1,5 @@
 const mapJson = require('./map.json');
-const { parseText, backToMainMenu } = require('./helpers');
+const { parseText } = require('./helpers');
 const kb = require ('./keyboard-buttons');
 
 const REGION_REG_EXP = /^[а-яА-ЯЁё0-9 ]+$/;
@@ -61,7 +61,9 @@ module.exports = {
           }, 1000);
         } else {
           bot.removeTextListener(REGION_REG_EXP);
-          await bot.sendMessage(id, 'К сожалению в данном регионе нет кризисных центров. Или название региона указано неверно')
+          await bot.sendMessage(id, `К сожалению в данном регионе нет кризисных центров. 
+Возможно, вы сделали ошибку в написании или ввели название города.
+Введите номер или название региона.`)
           showFederalCentersBtn(id, bot);
         }
       });

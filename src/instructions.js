@@ -10,10 +10,10 @@ module.exports = {
   },
 
   LINKS: {
-    SAFETY_PLAN: 'https://t.me/iv?url=https%3A%2F%2Fzp.purelines.ru%2Fdomestic-violence%2Finstructions%2Fsafe-plan.php&rhash=138bf2b163958c',
-    PHISICAL_VIOLENCE: 'https://t.me/iv?url=https%3A%2F%2Fzp.purelines.ru%2Fdomestic-violence%2Finstructions%2Fphysical-violence.php&rhash=138bf2b163958c',
-    SEXUAL_VIOLENCE: 'https://t.me/iv?url=https%3A%2F%2Fzp.purelines.ru%2Fdomestic-violence%2Finstructions%2Fsexualized-violence.php&rhash=138bf2b163958c',
-    RULES_SENDING_APPLICATION: 'https://t.me/iv?url=https%3A%2F%2Fzp.purelines.ru%2Fdomestic-violence%2Finstructions%2Fcorrect-application.php&rhash=138bf2b163958c',
+    SAFETY_PLAN: 'https://t.me/iv?url=https%3A%2F%2Fzonaprava.com%2Fdomestic-violence%2Finstructions%2Fsafe-plan.php&rhash=f69d5c9b0927d4',
+    PHISICAL_VIOLENCE: 'https://t.me/iv?url=https%3A%2F%2Fzonaprava.com%2Fdomestic-violence%2Finstructions%2Fphysical-violence.php&rhash=f69d5c9b0927d4',
+    SEXUAL_VIOLENCE: 'https://t.me/iv?url=https%3A%2F%2Fzonaprava.com%2Fdomestic-violence%2Finstructions%2Fsexualized-violence.php&rhash=f69d5c9b0927d4',
+    RULES_SENDING_APPLICATION: 'https://t.me/iv?url=https%3A%2F%2Fzonaprava.com%2Fdomestic-violence%2Finstructions%2Fcorrect-application.php&rhash=f69d5c9b0927d4',
   },
 
   async instructionsHandler (id, bot) {

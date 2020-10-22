@@ -1,5 +1,6 @@
 const mapJson = require('./map.json');
 const { parseText } = require('./helpers');
+const { analytics, eventAnalytics } = require ('./analytics');
 const kb = require ('./keyboard-buttons');
 
 const REGION_REG_EXP = /^[а-яА-ЯЁё0-9 ]+$/;
@@ -23,12 +24,14 @@ function showFederalCentersBtn (id, bot) {
 
 module.exports = {
   async helpMapHandler(id, bot) {
+    analytics('/helpmap', 'Карта помощи');
     try {
       await bot.sendMessage(id, 'Укажите название или номер вашего региона');
       await bot.onText(REGION_REG_EXP, async (msg) => {
         const { text } = msg;
         const requestStringArr = text.split(' ');
 
+        eventAnalytics('Карта помощи', requestStringArr);
         // search for requested region
         let regionCenters = text
           ? mapJson.filter((item) => {

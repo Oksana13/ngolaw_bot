@@ -1,4 +1,5 @@
 const { l10n } = require ('./constants');
+const { analytics } = require ('./analytics');
 
 module.exports = {
   async sendLink(id, bot, link) {
@@ -17,6 +18,7 @@ module.exports = {
   },
 
   async instructionsHandler (id, bot) {
+    analytics('/instructions', 'Инструкции');
     await bot.sendMessage(id, 'Выберите инструкцию:', {
       reply_markup: {
         keyboard: [

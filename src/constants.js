@@ -7,5 +7,6 @@ module.exports = {
     backButton: 'Главное меню',
     chooseSection: 'Выберите раздел:',
     newSearch: 'Новый поиск',
+    webSite: 'Сайт zonaprava.com',
   },
 };

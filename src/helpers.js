@@ -18,7 +18,7 @@ module.exports = {
     setTimeout(() => {
       bot.sendMessage(id, 'Вернуться в главное меню?', {
         reply_markup: {
-          inline_keyboard: kb.back,
+          inline_keyboard: kb.backOrWebsite,
         },
       });
     }, 1000);

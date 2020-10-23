@@ -29,7 +29,11 @@ module.exports = {
       callback_data: 'back',
     }],
   ],
-  back: [
+  backOrWebsite: [
+    [{
+      text: l10n.webSite,
+      url: 'https://zonaprava.com/?utm_source=telegram',
+    }],
     [{
       text: l10n.backButton,
       callback_data: 'back',

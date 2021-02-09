@@ -3,47 +3,27 @@ const { l10n } = require ('./constants');
 module.exports = {
   home: [
     [{
-      text: 'Инструкции',
-      callback_data: 'instructions',
+      text: 'За что физлицо могут признать иноагентом?',
+      callback_data: 'person',
     }],
     [{
-      text: 'Помощь юристов',
-      callback_data: 'legalAssistance',
+      text: 'Я получаю иностранные деньги',
+      callback_data: 'money',
     }],
     [{
-      text: 'Карта помощи',
-      callback_data: 'helpMap',
+      text: 'Я пишу на политические темы',
+      callback_data: 'politic',
+    }],
+    [{
+      text: 'Признали иностранным агентом',
+      callback_data: 'agent',
+    }],
+    [{
+      text: 'Я работаю в НКО, которую признали иностранным агентом',
+      callback_data: 'ngo',
     }],
   ],
-  federalCenters: [
-    [{
-      text: 'Смотреть',
-      callback_data: 'federalCenters',
-    }],
-    [{
-      text: l10n.newSearch,
-      callback_data: 'helpMap',
-    }],
-    [{
-      text: l10n.backButton,
-      callback_data: 'back',
-    }],
-  ],
-  backOrWebsite: [
-    [{
-      text: l10n.webSite,
-      url: 'https://zonaprava.com/?utm_source=telegram',
-    }],
-    [{
-      text: l10n.backButton,
-      callback_data: 'back',
-    }],
-  ],
-  backAndSearch: [
-    [{
-      text: l10n.newSearch,
-      callback_data: 'helpMap',
-    }],
+  back: [
     [{
       text: l10n.backButton,
       callback_data: 'back',

@@ -9,7 +9,7 @@
   "author": "Oksana Klimova",
   "license": "ISC",
   "dependencies": {
-    "node-telegram-bot-api": "^0.50.0",
+    "node-telegram-bot-api": "^0.51.0",
     "universal-analytics": "^0.4.23"
   },
   "devDependencies": {
